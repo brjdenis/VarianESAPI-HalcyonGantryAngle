@@ -12,6 +12,13 @@ The script was developed for Eclipse version 15.6. It may not work with other ve
 2. Don't forget the references to Varian dlls.
 3. Compile as Release for x64.
 
+## Use
+
+1. In External Beam Planning open a 2D portal image of the phantom. You can set Window/Level before running the script.
+2. Run the script.
+3. Read the Help to learn how to move the circles.
+
+
 ## Important note
 
 **Before using this program see the [licence](https://github.com/brjdenis/VarianESAPI-HalcyonGantryAngle/blob/master/LICENSE) and make sure you understand it. The program comes with absolutely no guarantees of any kind.**

@@ -18,7 +18,6 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using OxyPlot.Wpf;
-using Microsoft.Win32;
 using Image = VMS.TPS.Common.Model.API.Image;
 using OxyPlot.Annotations;
 

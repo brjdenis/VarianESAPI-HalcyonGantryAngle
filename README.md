@@ -20,7 +20,7 @@ The script was developed for Eclipse version 15.6. It may not work with other ve
 
 Angle deviations are calculated with this formula:
 
-![image](image.png)
+![image](imageeq.png)
 
 Here *a* is the distance of the upper circle from the center of the cube, and *b* is the distance of the lower circle from the center of the cube (a = b = 5.7 cm).
 

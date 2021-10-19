@@ -1,0 +1,44 @@
+﻿<Window x:Class="HalcyonGantryAngle.HelpWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HalcyonGantryAngle"
+             mc:Ignorable="d" 
+             Height="400" Width="700" Title="Help" Background="AliceBlue" WindowStartupLocation="CenterScreen" FontSize="14">
+    <Grid>
+        <Grid Grid.Row="1" Margin="10,10,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0">
+                0. If you change Window/Level in Eclipse, this will be taken into account.
+                <LineBreak/>
+                <LineBreak/>
+                1. Click with the Left mouse button to show the crosshair. The last position is saved internally. <LineBreak/>
+                   &#160;&#160;&#160;&#160;Press the Cursor buttons to move the circles to the last saved position.<LineBreak/>
+                <LineBreak/>
+                2. To Zoom-in use the Scroll Wheel. You can select the zoom-in region with the Scroll wheel by pressing it.
+                <LineBreak/>
+                <LineBreak/>
+                3. Double click the Scrool Wheel to reset zoom.
+                <LineBreak/>
+                <LineBreak/>
+                4. Click the Right Mouse button to pan the image.
+                <LineBreak/>
+                <LineBreak/>
+                5. DeltaXY, Radius and Thickness will change after the input boxes change focus.
+                <LineBreak/>
+                <LineBreak/>
+                6. The X and Y deviations are the differences in circle centers.
+                <LineBreak/>
+                <LineBreak/>
+                7. The angle deviations are calculated like this: arc sin(X/2a) and arc sin(Y/2a), <LineBreak/>
+                &#160;&#160;&#160;&#160;where 2a = 11.4 cm is the vertical distance between the circles in the cube.
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>

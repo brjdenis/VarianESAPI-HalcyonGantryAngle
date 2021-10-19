@@ -22,7 +22,7 @@ Angle deviations are calculated with this formula:
 
 ![image](imageeq.png)
 
-Here *a* is the distance of the upper circle from the center of the cube, and *b* is the distance of the lower circle from the center of the cube (a = b = 5.7 cm).
+Here *a* is the distance of the upper circle from the center of the cube, and *b* is the distance of the lower circle from the center of the cube (a = b = 5.7 cm). *X* and *Y* are the measured distances between the centers of the circles. This is an approximation. You can change the formula in *CalculateDeviation()*.
 
 ## Important note
 

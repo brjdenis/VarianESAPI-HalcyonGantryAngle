@@ -1,5 +1,5 @@
 # Halcyon gantry angle
-Varian ESAPI script for displaying a 2D image of the Cirs IsoCube with two circular objects that are used to calculate the Halcyon gantry angle deviation.
+Varian ESAPI script for (manually) analyzing a 2D image of the Cirs IsoCube with two circular objects that are used to calculate the Halcyon gantry angle deviation.
 
 ![image](image.png)
 
@@ -8,13 +8,23 @@ Varian ESAPI script for displaying a 2D image of the Cirs IsoCube with two circu
 To use the script, you must compile it on your system. You should be able to open the project with Visual Studio 2019 Community Edition. Open the .sln file in Dosimetry folder. 
 The script was developed for Eclipse version 15.6. It may not work with other versions of Eclipse or Varian ESAPI.
 
-1. You will need to restore NuGet package for compilation: OxyPlot. Right click the solution -> Restore NuGet packages.
+1. You will need to restore NuGet package for compilation: OxyPlot, Evil-Dicom. Right click the solution -> Restore NuGet packages.
 2. Don't forget the references to Varian dlls.
 3. Compile as Release for x64.
 
-## Use
+## Standalone version (updated)
 
-1. In External Beam Planning open a 2D portal image of the phantom. You can set Window/Level before running the script.
+If you don't have ESAPI, you can still use the program. Go to the folder *HalcyonGantryAngle_Standalone* and copy the contents to your computer. Run the .EXE file and select a dicom file that you would like to analyze. That is all. 
+
+The program will call .esapi.dll library but without going through the same path as it would if you called it via Eclipse. It is really botched-up, to be honest ... not a very good programmer here.
+
+The standalone version is using [Evil-dicom](https://github.com/rexcardan/Evil-DICOM) to read the image data. The dlls are included.
+
+There is a very small difference in how the image is displayed via ESAPI or the standalone program. You will notice some difference in gray values and how Window/Level is applied at the beginning. If the radius of the circles is not close to the radius of the circular slice, then there may be a problem with the decimal point representation. Change the culture of your system to "en-US".
+
+## Use in Eclipse
+
+1. In External Beam Planning open a 2D portal image of the phantom. You can set Window/Level before running the script. The script will display internal pixel values, not taking into account *intercept* and *slope*.
 2. Run the script.
 3. Read the Help to learn how to move the circles.
 

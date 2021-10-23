@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HalcyonGantryAngle"
              mc:Ignorable="d" 
-             Height="400" Width="700" Title="Help" Background="AliceBlue" WindowStartupLocation="CenterScreen" FontSize="14">
+             Height="450" Width="700" Title="Help" Background="AliceBlue" WindowStartupLocation="CenterScreen" FontSize="14">
     
     <Window.Resources>
         <Style TargetType="{x:Type Button}"/>
@@ -46,13 +46,17 @@
                 4. Click the Right Mouse button to pan the image.
                 <LineBreak/>
                 <LineBreak/>
-                5. DeltaXY, Radius and Thickness will change after the input boxes change focus.
+                5. Click on the sliders and press the Left or Right arrow keys on the keyboard<LineBreak/>
+                &#160; &#160; to make small adjustments to window/level.
                 <LineBreak/>
                 <LineBreak/>
-                6. The X and Y deviations are the differences in circle centers.
+                6. DeltaXY, Radius and Thickness will change after the input boxes change focus.
                 <LineBreak/>
                 <LineBreak/>
-                7. The angle deviations are calculated like this: arc sin(X/2a) and arc sin(Y/2a), <LineBreak/>
+                7. The X and Y deviations are the differences in circle centers.
+                <LineBreak/>
+                <LineBreak/>
+                8. The angle deviations are calculated like this: arc sin(X/2a) and arc sin(Y/2a), <LineBreak/>
                 &#160;&#160;&#160;&#160;where 2a = 11.4 cm is the vertical distance between the circles in the cube.
             </TextBlock>
         </Grid>

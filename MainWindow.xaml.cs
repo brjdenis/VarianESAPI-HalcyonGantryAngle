@@ -20,6 +20,8 @@ using OxyPlot.Series;
 using OxyPlot.Wpf;
 using Image = VMS.TPS.Common.Model.API.Image;
 using OxyPlot.Annotations;
+using System.Threading;
+using System.Globalization;
 
 namespace HalcyonGantryAngle
 {
@@ -31,11 +33,10 @@ namespace HalcyonGantryAngle
     public partial class MainWindow : Window
     {
         //private static readonly PlotView PlotView = new PlotView();
-        public readonly ScriptContext scriptcontext;
         public double[,] image { get; set; }
         public PlotModel PlotModel { get; set; }
 
-        public LinearColorAxis arrayLinearColorAxis = new LinearColorAxis{ Palette = OxyPalettes.Gray(255) };
+        public LinearColorAxis arrayLinearColorAxis = new LinearColorAxis{ Palette = OxyPalettes.Gray(1024) };
 
         public EllipseAnnotation Circle1 = new EllipseAnnotation { Fill = OxyColors.Transparent, Stroke = OxyColors.Red, StrokeThickness = 2 };
         public EllipseAnnotation Circle2 = new EllipseAnnotation { Fill = OxyColors.Transparent, Stroke = OxyColors.Blue, StrokeThickness = 2 };
@@ -55,24 +56,43 @@ namespace HalcyonGantryAngle
         public int minPixelValue; // in loaded array
         public int maxPixelValue;
 
+        public int window;
+        public int level;
+
+        public int Xsize;
+        public int Ysize;
+
+        public double Xres;
+
         public double a = 5.7; // cm
         public double b = 5.7; // cm
         public double SAD = 100.0; // cm
         public double pi = Math.PI;
 
 
-        public MainWindow( ScriptContext _scriptcontext)
+        public MainWindow(double[,] image, int level, int window, int minPixelValue, int maxPixelValue, int Xsize, int Ysize, double Xres)
         {
-            this.scriptcontext = _scriptcontext;
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+
+            this.image = image;
+
+            this.lowerPixelValue = level - window / 2;
+            this.upperPixelValue = level + window / 2;
+            this.minPixelValue = minPixelValue;
+            this.maxPixelValue = maxPixelValue;
 
             InitializeComponent();
 
             this.Tab1TextBoxCircle1Radius.Text = this.radius1.ToString();
             this.Tab1TextBoxCircle2Radius.Text = this.radius2.ToString();
 
-            this.dpmm = 1.0 / _scriptcontext.Image.XRes;
+            this.dpmm = 1.0 / Xres;
 
-            image = GetImage(_scriptcontext);
+            this.Xsize = Xsize;
+            this.Ysize = Ysize;
+            this.Xres = Xres;
+            this.level = level;
+            this.window = window;
             PlotModel = CreatePlotModel();
 
             myPlot.Model = PlotModel;
@@ -93,51 +113,6 @@ namespace HalcyonGantryAngle
             return plotModel;
         }
 
-        public double[,] GetImage(ScriptContext scriptcontext)
-        {
-            Image portalDose = scriptcontext.Image;
-
-            int sizeX = portalDose.XSize;
-            int sizeY = portalDose.YSize;
-
-            int level = portalDose.Level;
-            int window = portalDose.Window;
-
-            this.lowerPixelValue = level - window / 2;
-            this.upperPixelValue = level + window / 2;
-
-            int[,] pixelsPort = new int[sizeX, sizeY];
-            double[,] pixelsPort2 = new double[sizeX, sizeY];
-
-            portalDose.GetVoxels(0, pixelsPort);
-
-            double minVal = 0;
-            double maxVal = 0;
-
-            for (int i = 0; i < sizeX; i++)
-            {
-                for (int j = 0; j < sizeY; j++)
-                {
-                    double tempVal = (double)pixelsPort[i, j];
-
-                    if (tempVal > maxVal)
-                    {
-                        maxVal = tempVal;
-                    }
-                    if (tempVal < minVal)
-                    {
-                        minVal = tempVal;
-                    }
-                    pixelsPort2[i, sizeY - j - 1] = tempVal;
-                }
-            }
-
-            this.minPixelValue = (int)minVal;
-            this.maxPixelValue = (int)maxVal;
-
-            return pixelsPort2;
-        }
-
         public void AddAxes(PlotModel plotModel)
         {
             this.arrayLinearColorAxis.Maximum = this.upperPixelValue;
@@ -148,8 +123,8 @@ namespace HalcyonGantryAngle
         public void DefineSliderWindowStartingValue()
         {
             this.SliderWindow.Minimum = 0;
-            this.SliderWindow.Maximum = this.maxPixelValue;
-            this.SliderWindow.Value = this.scriptcontext.Image.Window;
+            this.SliderWindow.Maximum = Math.Abs((this.maxPixelValue - this.minPixelValue));
+            this.SliderWindow.Value = this.window;
 
             this.SliderWindowLabel.Content = this.SliderWindow.Value.ToString();
         }
@@ -158,7 +133,7 @@ namespace HalcyonGantryAngle
         {
             this.SliderLevel.Minimum = this.minPixelValue;
             this.SliderLevel.Maximum = this.maxPixelValue;
-            this.SliderLevel.Value = this.scriptcontext.Image.Level;
+            this.SliderLevel.Value = this.level;
 
             this.SliderLevelLabel.Content = this.SliderLevel.Value.ToString();
         }
@@ -189,8 +164,8 @@ namespace HalcyonGantryAngle
 
         public void AddCircles(PlotModel plotModel)
         {
-            double centerX = this.scriptcontext.Image.XSize / 2;
-            double centerY = this.scriptcontext.Image.YSize / 2;
+            double centerX = this.Xsize / 2;
+            double centerY = this.Ysize / 2;
 
             this.Circle1.X = centerX;
             this.Circle1.Y = centerY;
@@ -379,6 +354,26 @@ namespace HalcyonGantryAngle
             HelpWindow helpwindow = new HelpWindow();
             helpwindow.Owner = this;
             helpwindow.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.SliderWindow.Value -= 1;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.SliderWindow.Value += 1;
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            this.SliderLevel.Value -= 1;
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            this.SliderLevel.Value += 1;
         }
     }
 }

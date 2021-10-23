@@ -4,6 +4,9 @@ Compiled/*
 bin/*
 obj/*
 packages/*
+HalcyonGantryAngle_Standalone/obj/*
+HalcyonGantryAngle_Standalone/Compiled/*.config
+HalcyonGantryAngle_Standalone/Compiled/ConsoleOutput.txt
 
 #Files to ignore
 *.pdb

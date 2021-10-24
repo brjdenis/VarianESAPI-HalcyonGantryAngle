@@ -14,7 +14,7 @@ The script was developed for Eclipse version 15.6. It may not work with other ve
 
 ## Standalone version (updated)
 
-If you don't have ESAPI, you can still use the program. Go to the folder [*HalcyonGantryAngle_Standalone/Compiled*](https://github.com/brjdenis/VarianESAPI-HalcyonGantryAngle/tree/master/HalcyonGantryAngle_Standalone/Compiled) and copy the contents to your computer. Run the .EXE file and select a dicom file that you would like to analyze. That is all. 
+If you don't have ESAPI, you can still use the program. Download it from here: [HalcyonGantryAngle_Standalone.zip](https://github.com/brjdenis/VarianESAPI-HalcyonGantryAngle/releases/download/v1/HalcyonGantryAngle_Standalone.zip) and unzip the contents to your computer. Run the .EXE file and select a dicom file that you would like to analyze. That is all. 
 
 The program will call .esapi.dll library but without going through the same path as it would if you called it via Eclipse. It is really botched-up, to be honest ... not a very good programmer here.
 

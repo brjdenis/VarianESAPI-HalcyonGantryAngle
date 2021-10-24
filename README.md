@@ -1,11 +1,11 @@
 # Halcyon gantry angle
-Varian ESAPI script for (manually) analyzing a 2D image of the Cirs IsoCube with two circular objects that are used to calculate the Halcyon gantry angle deviation.
+Varian ESAPI script and standalone app for manually analyzing 2D images of the [Cirs Daily Iso Phantom](https://www.cirsinc.com/products/radiation-therapy/daily-iso-phantom/) with two circular objects that are used to calculate the Halcyon gantry angle deviation.
 
 ![image](image.png)
 
 ## Setup
 
-To use the script, you must compile it on your system. You should be able to open the project with Visual Studio 2019 Community Edition. Open the .sln file in Dosimetry folder. 
+To use the script, you should compile it on your system or use the standalone version (below). You should be able to open the project with Visual Studio 2019 Community Edition. Open the .sln file in Dosimetry folder. 
 The script was developed for Eclipse version 15.6. It may not work with other versions of Eclipse or Varian ESAPI.
 
 1. You will need to restore NuGet package for compilation: OxyPlot, Evil-Dicom. Right click the solution -> Restore NuGet packages.
@@ -28,11 +28,15 @@ There is a very small difference in how the image is displayed via ESAPI or the 
 2. Run the script.
 3. Read the Help to learn how to move the circles.
 
+## Formula
+
 Angle deviations are calculated with this formula:
 
 ![image](imageeq.png)
 
-Here *a* is the distance of the upper circle from the center of the cube, and *b* is the distance of the lower circle from the center of the cube (a = b = 5.7 cm). *X* and *Y* are the measured distances between the centers of the circles. This is an approximation. You can change the formula in *CalculateDeviation()*.
+Here *a* is the distance of the upper circle from the center of the cube, and *b* is the distance of the lower circle from the center of the cube (a = b = 5.7 cm). *X* and *Y* are the measured distances between the centers of the circles. The deviation is always positive, you have to determine the direction of error. You can change the formula in *CalculateDeviation()*.
+
+The phantom must be leveled perfectly. 
 
 ## Important note
 

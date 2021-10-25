@@ -36,7 +36,11 @@ Angle deviations are calculated with this formula:
 
 Here *a* is the distance of the upper circle from the center of the cube, and *b* is the distance of the lower circle from the center of the cube (a = b = 5.7 cm). *X* and *Y* are the measured distances between the centers of the circles. The deviation is always positive, you have to determine the direction of error. You can change the formula in *CalculateDeviation()*.
 
-The formula is an approximation for small angle deviations. For arbitrary angles it gets too complicated to be practical.
+The formula is an approximation for small angle deviations. For arbitrary angles it gets too complicated to be practical, but with some reasonable assumptions it can be shown that the sin of the gantry angle deviation is the solution of this equation:
+
+![image](imageeq2.png)
+
+Where &Delta; is the distance between the circles on the image, and SAD = 100 cm.
 
 The phantom must be leveled perfectly. 
 

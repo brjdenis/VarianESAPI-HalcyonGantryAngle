@@ -36,7 +36,7 @@ namespace HalcyonGantryAngle
         public double[,] image { get; set; }
         public PlotModel PlotModel { get; set; }
 
-        public LinearColorAxis arrayLinearColorAxis = new LinearColorAxis{ Palette = OxyPalettes.Gray(1024) };
+        public LinearColorAxis arrayLinearColorAxis = new LinearColorAxis { Palette = OxyPalettes.Gray(1024) };
 
         public EllipseAnnotation Circle1 = new EllipseAnnotation { Fill = OxyColors.Transparent, Stroke = OxyColors.Red, StrokeThickness = 2 };
         public EllipseAnnotation Circle2 = new EllipseAnnotation { Fill = OxyColors.Transparent, Stroke = OxyColors.Blue, StrokeThickness = 2 };
@@ -64,9 +64,9 @@ namespace HalcyonGantryAngle
 
         public double Xres;
 
-        public double a = 5.7; // cm
-        public double b = 5.7; // cm
-        public double SAD = 100.0; // cm
+        public double a = 57; // mm
+        public double b = 57; // mm
+        public double SAD = 1000; // mm
         public double pi = Math.PI;
 
 
@@ -186,11 +186,14 @@ namespace HalcyonGantryAngle
             double devX = Math.Abs(this.Circle1.X - this.Circle2.X) / this.dpmm;
             double devY = Math.Abs(this.Circle1.Y - this.Circle2.Y) / this.dpmm;
 
-            //double temp = 10.0 * (this.a + this.SAD * this.b / (this.b + this.SAD)); // mm
-            double temp = 10.0  * (this.a + this.b); // mm
-            double angleX = Math.Asin(devX / temp) * 180.0 / this.pi;
-            double angleY = Math.Asin(devY / temp) * 180.0 / this.pi;
+            double a = this.a;
 
+            //double SAD = this.SAD;
+            //double angleX = Math.Asin((SAD * SAD / (devX * a)) * (1 - Math.Sqrt(1 - devX * devX / (SAD * SAD) + (devX * a / (SAD * SAD)) * (devX * a / (SAD * SAD)) ))) * 180.0 / this.pi;
+            //double angleY = Math.Asin((SAD * SAD / (devY * a)) * (1 - Math.Sqrt(1 - devY * devY / (SAD * SAD) + (devY * a / (SAD * SAD)) * (devY * a / (SAD * SAD))))) * 180.0 / this.pi;
+
+            double angleX = Math.Asin(devX / (2 * a)) * 180.0 / this.pi;
+            double angleY = Math.Asin(devY / (2 * a)) * 180.0 / this.pi;
 
             this.DeviationX.Content = devX.ToString("F2");
             this.DeviationY.Content = devY.ToString("F2");

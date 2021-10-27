@@ -202,6 +202,7 @@ namespace HalcyonGantryAngle
             this.DeviationAngleY.Content = angleY.ToString("F2");
         }
 
+
         private void UpdatePlotOnCircleChange()
         {
             this.PlotModel.InvalidatePlot(true);

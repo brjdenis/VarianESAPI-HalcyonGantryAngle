@@ -144,9 +144,9 @@ namespace HalcyonGantryAngle
             var series = new HeatMapSeries
             {
                 X0 = 0,
-                X1 = image.GetLength(0),
+                X1 = image.GetLength(0) - 1,
                 Y0 = 0,
-                Y1 = image.GetLength(1),
+                Y1 = image.GetLength(1) - 1,
                 Interpolate = false,
                 RenderMethod = HeatMapRenderMethod.Bitmap,
                 Data = image
